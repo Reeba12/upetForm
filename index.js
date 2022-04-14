@@ -13,9 +13,12 @@ mongoose.connect(url, { useNewUrlParser: true });
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, './client/build')));
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
+
 app.post('/', async (req, res) => {
   const {
     id,
@@ -50,7 +53,6 @@ app.get('/thank/:id', async (req, res) => {
   }
   res.send({ user });
 });
-app.use(express.static(path.join(__dirname, './client/build')));
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static('client/build'));
 // }
