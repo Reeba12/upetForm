@@ -9,9 +9,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",    
-    "start-client": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
     "heroku-postbuid":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
