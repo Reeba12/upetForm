@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const DB = require('./Db');
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -12,7 +13,10 @@ mongoose.connect(url, { useNewUrlParser: true });
 app.use(express.json());
 app.use(cors());
 
-app.post('/post', async (req, res) => {
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
+app.post('/', async (req, res) => {
   const {
     id,
     firstname,
@@ -46,7 +50,8 @@ app.get('/thank/:id', async (req, res) => {
   }
   res.send({ user });
 });
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
-app.listen(PORT, () => console.log('App listening'));
+app.use(express.static(path.join(__dirname, './client/build')));
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('client/build'));
+// }
+app.listen(PORT, () => console.log(`App listening ${PORT}`));

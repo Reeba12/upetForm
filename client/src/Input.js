@@ -78,7 +78,7 @@ const Input = () => {
                 setpasswordError(true);
               } else {
                 setpasswordError(false);
-                axios.post("http://localhost:4000/", {
+                axios.post("/", {
                   id: key,
                   firstname: input.firstname,
                   lastname: input.lastname,
